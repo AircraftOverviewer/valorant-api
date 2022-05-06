@@ -13,7 +13,7 @@ on:
       repository:
         description: The {owner}/{repository} that is being deployed.
         required: false
-        default: AircraftOverviewer/valorant-api
+        default: AircraftOverviewer/valorant-wrapper
   push:
     branches:
       - main
