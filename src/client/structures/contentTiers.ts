@@ -1,10 +1,17 @@
 import { handleFetch } from '../../utils/Fetch';
-import type { BaseOptions } from './global';
+import type { BaseOptions, UuidOptions } from './global';
 
 // eslint-disable-next-line @typescript-eslint/no-extraneous-class
 export class ContentTiersEndpoint {
-	public static async get(options?: BaseOptions): Promise<ContentTier> {
-		return handleFetch<ContentTier>(`/contenttiers/${options?.uuid}?language=${options?.language ?? 'en-US'}`);
+	public static async get(options: UuidOptions): Promise<ContentTier>;
+	public static async get(options?: BaseOptions): Promise<ContentTier[]>;
+	public static async get(options?: unknown): Promise<ContentTier | ContentTier[]> {
+		if ((options as UuidOptions).uuid) {
+			const _options = options as UuidOptions;
+			return handleFetch<ContentTier>(`/contenttiers/${_options.uuid}?language=${_options?.language ?? 'en-US'}`);
+		}
+		const _options = options as BaseOptions;
+		return handleFetch<ContentTier[]>(`/contenttiers?language=${_options?.language ?? 'en-US'}`);
 	}
 }
 

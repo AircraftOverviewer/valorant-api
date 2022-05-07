@@ -1,10 +1,17 @@
 import { handleFetch } from '../../utils/Fetch';
-import type { BaseOptions } from './global';
+import type { BaseOptions, UuidOptions } from './global';
 
 // eslint-disable-next-line @typescript-eslint/no-extraneous-class
 export class PlayerCardsEndpoint {
-	public static async get(options?: BaseOptions): Promise<PlayerCard> {
-		return handleFetch<PlayerCard>(`/playercards/${options?.uuid}?language=${options?.language ?? 'en-US'}`);
+	public static async get(options: UuidOptions): Promise<PlayerCard>;
+	public static async get(options?: BaseOptions): Promise<PlayerCard[]>;
+	public static async get(options?: unknown): Promise<PlayerCard | PlayerCard[]> {
+		if ((options as UuidOptions).uuid) {
+			const _options = options as UuidOptions;
+			return handleFetch<PlayerCard>(`/playercards/${_options.uuid}?language=${_options?.language ?? 'en-US'}`);
+		}
+		const _options = options as BaseOptions;
+		return handleFetch<PlayerCard[]>(`/playercards?language=${_options?.language ?? 'en-US'}`);
 	}
 }
 

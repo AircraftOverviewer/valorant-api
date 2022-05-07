@@ -1,10 +1,17 @@
 import { handleFetch } from '../../utils/Fetch';
-import type { BaseOptions } from './global';
+import type { BaseOptions, UuidOptions } from './global';
 
 // eslint-disable-next-line @typescript-eslint/no-extraneous-class
 export class CompetitiveTiersEndpoint {
-	public static async get(options?: BaseOptions): Promise<CompetitiveTierTable> {
-		return handleFetch<CompetitiveTierTable>(`/competitivetiers/${options?.uuid}?language=${options?.language ?? 'en-US'}`);
+	public static async get(options: UuidOptions): Promise<CompetitiveTierTable>;
+	public static async get(options?: BaseOptions): Promise<CompetitiveTierTable[]>;
+	public static async get(options?: unknown): Promise<CompetitiveTierTable | CompetitiveTierTable[]> {
+		if ((options as UuidOptions).uuid) {
+			const _options = options as UuidOptions;
+			return handleFetch<CompetitiveTierTable>(`/competitivetiers/${_options.uuid}?language=${_options?.language ?? 'en-US'}`);
+		}
+		const _options = options as BaseOptions;
+		return handleFetch<CompetitiveTierTable[]>(`/competitivetiers?language=${_options?.language ?? 'en-US'}`);
 	}
 }
 

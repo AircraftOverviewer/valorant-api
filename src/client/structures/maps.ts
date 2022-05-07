@@ -1,10 +1,17 @@
 import { handleFetch } from '../../utils/Fetch';
-import type { BaseOptions } from './global';
+import type { BaseOptions, UuidOptions } from './global';
 
 // eslint-disable-next-line @typescript-eslint/no-extraneous-class
 export class MapsEndpoint {
-	public static async get(options?: BaseOptions): Promise<Map> {
-		return handleFetch<Map>(`/maps/${options?.uuid}?language=${options?.language ?? 'en-US'}`);
+	public static async get(options: UuidOptions): Promise<Map>;
+	public static async get(options?: BaseOptions): Promise<Map[]>;
+	public static async get(options?: unknown): Promise<Map | Map[]> {
+		if ((options as UuidOptions).uuid) {
+			const _options = options as UuidOptions;
+			return handleFetch<Map>(`/maps/${_options.uuid}?language=${_options?.language ?? 'en-US'}`);
+		}
+		const _options = options as BaseOptions;
+		return handleFetch<Map[]>(`/maps?language=${_options?.language ?? 'en-US'}`);
 	}
 }
 

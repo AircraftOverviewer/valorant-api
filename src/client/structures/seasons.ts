@@ -1,14 +1,28 @@
 import { handleFetch } from '../../utils/Fetch';
-import type { BaseOptions } from './global';
+import type { BaseOptions, UuidOptions } from './global';
 
 // eslint-disable-next-line @typescript-eslint/no-extraneous-class
 export class SeasonsEndpoint {
-	public static async get(options?: BaseOptions): Promise<Season> {
-		return handleFetch<Season>(`/seasons/${options?.uuid}?language=${options?.language ?? 'en-US'}`);
+	public static async get(options: UuidOptions): Promise<Season>;
+	public static async get(options?: BaseOptions): Promise<Season[]>;
+	public static async get(options?: unknown): Promise<Season | Season[]> {
+		if ((options as UuidOptions).uuid) {
+			const _options = options as UuidOptions;
+			return handleFetch<Season>(`/seasons/${_options.uuid}?language=${_options?.language ?? 'en-US'}`);
+		}
+		const _options = options as BaseOptions;
+		return handleFetch<Season[]>(`/seasons?language=${_options?.language ?? 'en-US'}`);
 	}
 
-	public static async getSeasons(options?: BaseOptions): Promise<CompetitiveSeason> {
-		return handleFetch<CompetitiveSeason>(`seasons/competitive/${options?.uuid}?language=${options?.language ?? 'en-US'}`);
+	public static async getCompetitive(options: UuidOptions): Promise<CompetitiveSeason>;
+	public static async getCompetitive(options?: BaseOptions): Promise<CompetitiveSeason[]>;
+	public static async getCompetitive(options?: unknown): Promise<CompetitiveSeason | CompetitiveSeason[]> {
+		if ((options as UuidOptions).uuid) {
+			const _options = options as UuidOptions;
+			return handleFetch<CompetitiveSeason>(`/seasons/competitive/${_options.uuid}?language=${_options?.language ?? 'en-US'}`);
+		}
+		const _options = options as BaseOptions;
+		return handleFetch<CompetitiveSeason[]>(`/seasons/competitive?language=${_options?.language ?? 'en-US'}`);
 	}
 }
 

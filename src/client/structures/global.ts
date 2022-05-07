@@ -5,8 +5,12 @@ export interface BaseResult {
 }
 
 export interface BaseOptions {
+	language: Language;
+}
+
+export interface UuidOptions {
+	uuid: string;
 	language?: Language;
-	uuid?: string;
 }
 
 export type Language =

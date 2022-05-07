@@ -3,10 +3,17 @@ import type { BaseOptions } from './global';
 
 // eslint-disable-next-line @typescript-eslint/no-extraneous-class
 export class AgentsEndpoint {
-	public static async get(options?: AgentOptions): Promise<Agent> {
-		return handleFetch<Agent>(
-			`/agents/${options?.uuid}?language=${options?.language ?? 'en-US'}&isPlayableCharacter=${options?.isPlayableCharacter ?? false}`
-		);
+	public static async get(_options: AgentUuidOptions): Promise<Agent>;
+	public static async get(_options?: AgentOptions): Promise<Agent[]>;
+	public static async get(_options?: unknown): Promise<Agent | Agent[]> {
+		if ((_options as AgentUuidOptions).uuid) {
+			const options = _options as AgentUuidOptions;
+			return handleFetch<Agent>(
+				`/agents/${options.uuid}?language=${options?.language ?? 'en-US'}&isPlayableCharacter=${options?.isPlayableCharacter ?? false}`
+			);
+		}
+		const options = _options as AgentUuidOptions;
+		return handleFetch<Agent[]>(`/agents?language=${options?.language ?? 'en-US'}&isPlayableCharacter=${options?.isPlayableCharacter ?? false}`);
 	}
 }
 
@@ -63,4 +70,8 @@ export interface AgentVoicelineMedia {
 
 export interface AgentOptions extends BaseOptions {
 	isPlayableCharacter?: boolean;
+}
+
+export interface AgentUuidOptions extends AgentOptions {
+	uuid: string;
 }
