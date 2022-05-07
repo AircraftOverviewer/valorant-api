@@ -3,9 +3,9 @@ import type { BaseOptions, UuidOptions } from './global';
 
 // eslint-disable-next-line @typescript-eslint/no-extraneous-class
 export class GearEndpoint {
-	public static async get(options: UuidOptions): Promise<Gear>;
-	public static async get(options?: BaseOptions): Promise<Gear[]>;
-	public static async get(options?: unknown): Promise<Gear | Gear[]> {
+	public async get(options: UuidOptions): Promise<Gear>;
+	public async get(options?: BaseOptions): Promise<Gear[]>;
+	public async get(options?: unknown): Promise<Gear | Gear[]> {
 		if ((options as UuidOptions).uuid) {
 			const _options = options as UuidOptions;
 			return handleFetch<Gear>(`/gear/${_options.uuid}?language=${_options?.language ?? 'en-US'}`);

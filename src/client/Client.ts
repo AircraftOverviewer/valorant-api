@@ -22,23 +22,23 @@ import {
 
 // eslint-disable-next-line @typescript-eslint/no-extraneous-class
 export class ValAPI {
-	public static agents = AgentsEndpoint;
-	public static buddies = BuddiesEndpoint;
-	public static bundles = BundlesEndpoint;
-	public static ceremonies = CeremoniesEndpoint;
-	public static competitiveTiers = CompetitiveTiersEndpoint;
-	public static contentTiers = ContentTiersEndpoint;
-	public static contracts = ContractsEndpoint;
-	public static currencies = CurrenciesEndpoint;
-	public static events = EventsEndpoint;
-	public static gamemodes = GamemodesEndpoint;
-	public static gear = GearEndpoint;
-	public static maps = MapsEndpoint;
-	public static playerCards = PlayerCardsEndpoint;
-	public static playerTitles = PlayerTitlesEndpoint;
-	public static seasons = SeasonsEndpoint;
-	public static sprays = SpraysEndpoint;
-	public static themes = ThemesEndpoint;
-	public static weapons = WeaponsEndpoint;
-	public static version = VersionEndpoint;
+	public static agents = new AgentsEndpoint();
+	public static buddies = new BuddiesEndpoint();
+	public static bundles = new BundlesEndpoint();
+	public static ceremonies = new CeremoniesEndpoint();
+	public static competitiveTiers = new CompetitiveTiersEndpoint();
+	public static contentTiers = new ContentTiersEndpoint();
+	public static contracts = new ContractsEndpoint();
+	public static currencies = new CurrenciesEndpoint();
+	public static events = new EventsEndpoint();
+	public static gamemodes = new GamemodesEndpoint();
+	public static gear = new GearEndpoint();
+	public static maps = new MapsEndpoint();
+	public static playerCards = new PlayerCardsEndpoint();
+	public static playerTitles = new PlayerTitlesEndpoint();
+	public static seasons = new SeasonsEndpoint();
+	public static sprays = new SpraysEndpoint();
+	public static themes = new ThemesEndpoint();
+	public static weapons = new WeaponsEndpoint();
+	public static version = new VersionEndpoint();
 }

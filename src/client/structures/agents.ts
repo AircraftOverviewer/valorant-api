@@ -2,9 +2,9 @@ import { handleFetch } from '../../utils/Fetch';
 
 // eslint-disable-next-line @typescript-eslint/no-extraneous-class
 export class AgentsEndpoint {
-	public static async get(_options: AgentUuidOptions): Promise<Agent>;
-	public static async get(_options?: AgentOptions): Promise<Agent[]>;
-	public static async get(_options?: unknown): Promise<Agent | Agent[]> {
+	public async get(_options: AgentUuidOptions): Promise<Agent>;
+	public async get(_options?: AgentOptions): Promise<Agent[]>;
+	public async get(_options?: unknown): Promise<Agent | Agent[]> {
 		if ((_options as AgentUuidOptions).uuid) {
 			const options = _options as AgentUuidOptions;
 			return handleFetch<Agent>(

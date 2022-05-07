@@ -2,7 +2,7 @@ import { handleFetch } from '../../utils/Fetch';
 
 // eslint-disable-next-line @typescript-eslint/no-extraneous-class
 export class VersionEndpoint {
-	public static async get(): Promise<Version> {
+	public async get(): Promise<Version> {
 		return handleFetch<Version>(`/version`);
 	}
 }
