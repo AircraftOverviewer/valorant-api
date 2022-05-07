@@ -1,14 +1,10 @@
 import { handleFetch } from '../../utils/Fetch';
-import type { Language, BaseUuidOption } from './global';
+import type { BaseOptions } from './global';
 
 // eslint-disable-next-line @typescript-eslint/no-extraneous-class
 export class ContractsEndpoint {
-	public static async getContracts(language?: Language): Promise<Contract[]> {
-		return handleFetch<Contract[]>(`/contracts?language=${language ?? 'en-US'}`);
-	}
-
-	public static async getContractByUuid(options: BaseUuidOption): Promise<Contract> {
-		return handleFetch<Contract>(`/contracts/${options.uuid}?language=${options.language ?? 'en-US'}`);
+	public static async get(options?: BaseOptions): Promise<Contract> {
+		return handleFetch<Contract>(`/contracts/${options?.uuid}?language=${options?.language ?? 'en-US'}`);
 	}
 }
 

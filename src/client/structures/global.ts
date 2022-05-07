@@ -4,12 +4,9 @@ export interface BaseResult {
 	data: unknown;
 }
 
-export interface BaseFetchOption {
+export interface BaseOptions {
 	language?: Language;
-}
-
-export interface BaseUuidOption extends BaseFetchOption {
-	uuid: string;
+	uuid?: string;
 }
 
 export type Language =

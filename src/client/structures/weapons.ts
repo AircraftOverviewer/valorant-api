@@ -1,38 +1,22 @@
 import { handleFetch } from '../../utils/Fetch';
-import type { BaseUuidOption, Language } from './global';
+import type { BaseOptions } from './global';
 
 // eslint-disable-next-line @typescript-eslint/no-extraneous-class
 export class WeaponsEndpoint {
-	public static async getWeapons(language?: Language): Promise<Weapon[]> {
-		return handleFetch<Weapon[]>(`/weapons?language=${language ?? 'en-US'}`);
+	public static async get(options?: BaseOptions): Promise<Weapon> {
+		return handleFetch<Weapon>(`/weapons/${options?.uuid}?language=${options?.language ?? 'en-US'}`);
 	}
 
-	public static async getWeaponSkins(language?: Language): Promise<WeaponSkin[]> {
-		return handleFetch<WeaponSkin[]>(`/weapons/skins?language=${language ?? 'en-US'}`);
+	public static async getSkins(options?: BaseOptions): Promise<WeaponSkin> {
+		return handleFetch<WeaponSkin>(`/weapons/skins/${options?.uuid}?language=${options?.language ?? 'en-US'}`);
 	}
 
-	public static async getWeaponSkinChromas(language?: Language): Promise<WeaponSkinChroma[]> {
-		return handleFetch<WeaponSkinChroma[]>(`/weapons/skinchromas?language=${language ?? 'en-US'}`);
+	public static async getSkinChromas(options?: BaseOptions): Promise<WeaponSkinChroma> {
+		return handleFetch<WeaponSkinChroma>(`/weapons/skinchromas/${options?.uuid}?language=${options?.language ?? 'en-US'}`);
 	}
 
-	public static async getWeaponSkinLevels(language?: Language): Promise<WeaponSkinLevel[]> {
-		return handleFetch<WeaponSkinLevel[]>(`/weapons/skinlevels?language=${language ?? 'en-US'}`);
-	}
-
-	public static async getWeaponByUuid(options: BaseUuidOption): Promise<Weapon> {
-		return handleFetch<Weapon>(`/weapons/${options.uuid}?language=${options.language ?? 'en-US'}`);
-	}
-
-	public static async getWeaponSkinByUuid(options: BaseUuidOption): Promise<WeaponSkin> {
-		return handleFetch<WeaponSkin>(`/weapons/skins/${options.uuid}?language=${options.language ?? 'en-US'}`);
-	}
-
-	public static async getWeaponSkinChromaByUuid(options: BaseUuidOption): Promise<WeaponSkinChroma> {
-		return handleFetch<WeaponSkinChroma>(`/weapons/skinchromas/${options.uuid}?language=${options.language ?? 'en-US'}`);
-	}
-
-	public static async getWeaponSkinLevelByUuid(options: BaseUuidOption): Promise<WeaponSkinLevel> {
-		return handleFetch<WeaponSkinLevel>(`/weapons/skinlevels/${options.uuid}?language=${options.language ?? 'en-US'}`);
+	public static async getSkinLevels(options?: BaseOptions): Promise<WeaponSkinLevel> {
+		return handleFetch<WeaponSkinLevel>(`/weapons/skinlevels/${options?.uuid}?language=${options?.language ?? 'en-US'}`);
 	}
 }
 

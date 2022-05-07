@@ -1,14 +1,10 @@
 import { handleFetch } from '../../utils/Fetch';
-import type { Language, BaseUuidOption } from './global';
+import type { BaseOptions } from './global';
 
 // eslint-disable-next-line @typescript-eslint/no-extraneous-class
 export class CurrenciesEndpoint {
-	public static async getCurrencies(language?: Language): Promise<Currency[]> {
-		return handleFetch<Currency[]>(`/currencies?language=${language ?? 'en-US'}`);
-	}
-
-	public static async getCurrencyByUuid(options: BaseUuidOption): Promise<Currency> {
-		return handleFetch<Currency>(`/currencies/${options.uuid}?language=${options.language ?? 'en-US'}`);
+	public static async get(options?: BaseOptions): Promise<Currency> {
+		return handleFetch<Currency>(`/currencies/${options?.uuid}?language=${options?.language ?? 'en-US'}`);
 	}
 }
 

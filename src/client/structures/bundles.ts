@@ -1,14 +1,10 @@
 import { handleFetch } from '../../utils/Fetch';
-import type { Language, BaseUuidOption } from './global';
+import type { BaseOptions } from './global';
 
 // eslint-disable-next-line @typescript-eslint/no-extraneous-class
 export class BundlesEndpoint {
-	public static async getBundles(language?: Language): Promise<Bundle[]> {
-		return handleFetch<Bundle[]>(`/bundles?language=${language ?? 'en-US'}`);
-	}
-
-	public static async getBundleByUuid(options: BaseUuidOption): Promise<Bundle> {
-		return handleFetch<Bundle>(`/bundles/${options.uuid}?language=${options.language ?? 'en-US'}`);
+	public static async get(options?: BaseOptions): Promise<Bundle> {
+		return handleFetch<Bundle>(`/bundles/${options?.uuid}?language=${options?.language ?? 'en-US'}`);
 	}
 }
 

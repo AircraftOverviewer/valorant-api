@@ -1,22 +1,14 @@
 import { handleFetch } from '../../utils/Fetch';
-import type { BaseUuidOption, Language } from './global';
+import type { BaseOptions } from './global';
 
 // eslint-disable-next-line @typescript-eslint/no-extraneous-class
 export class SpraysEndpoint {
-	public static async getSprays(language?: Language): Promise<Spray[]> {
-		return handleFetch<Spray[]>(`/sprays?language=${language ?? 'en-US'}`);
+	public static async get(options?: BaseOptions): Promise<Spray> {
+		return handleFetch<Spray>(`/sprays/${options?.uuid}?language=${options?.language ?? 'en-US'}`);
 	}
 
-	public static async getSprayLevels(language?: Language): Promise<SprayLevel[]> {
-		return handleFetch<SprayLevel[]>(`/sprays/levels?language=${language ?? 'en-US'}`);
-	}
-
-	public static async getSprayByUuid(options: BaseUuidOption): Promise<Spray> {
-		return handleFetch<Spray>(`/sprays/${options.uuid}?language=${options.language ?? 'en-US'}`);
-	}
-
-	public static async getSprayLevelByUuid(options: BaseUuidOption): Promise<SprayLevel> {
-		return handleFetch<SprayLevel>(`/sprays/levels/${options.uuid}?language=${options.language ?? 'en-US'}`);
+	public static async getLevels(options?: BaseOptions): Promise<SprayLevel> {
+		return handleFetch<SprayLevel>(`/sprays/levels/${options?.uuid}?language=${options?.language ?? 'en-US'}`);
 	}
 }
 

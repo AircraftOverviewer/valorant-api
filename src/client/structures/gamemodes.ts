@@ -1,22 +1,14 @@
 import { handleFetch } from '../../utils/Fetch';
-import type { Language, BaseUuidOption } from './global';
+import type { BaseOptions } from './global';
 
 // eslint-disable-next-line @typescript-eslint/no-extraneous-class
 export class GamemodesEndpoint {
-	public static async getGamemodes(language?: Language): Promise<Gamemode[]> {
-		return handleFetch<Gamemode[]>(`/gamemodes?language=${language ?? 'en-US'}`);
+	public static async get(options?: BaseOptions): Promise<Gamemode> {
+		return handleFetch<Gamemode>(`/gamemodes/${options?.uuid}?language=${options?.language ?? 'en-US'}`);
 	}
 
-	public static async getGamemodeEquippables(language?: Language): Promise<GamemodeEquippable[]> {
-		return handleFetch<GamemodeEquippable[]>(`/gamemodes/equippables?language=${language ?? 'en-US'}`);
-	}
-
-	public static async getGamemodeByUuid(options: BaseUuidOption): Promise<Gamemode> {
-		return handleFetch<Gamemode>(`/gamemodes/${options.uuid}?language=${options.language ?? 'en-US'}`);
-	}
-
-	public static async getGamemodeEquippableByUuid(options: BaseUuidOption): Promise<GamemodeEquippable> {
-		return handleFetch<GamemodeEquippable>(`/gamemodes/equippables/${options.uuid}?language=${options.language ?? 'en-US'}`);
+	public static async getEquippables(options?: BaseOptions): Promise<GamemodeEquippable> {
+		return handleFetch<GamemodeEquippable>(`/gamemodes/equippables/${options?.uuid}?language=${options?.language ?? 'en-US'}`);
 	}
 }
 
