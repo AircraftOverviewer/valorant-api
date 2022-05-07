@@ -1,5 +1,4 @@
 import { handleFetch } from '../../utils/Fetch';
-import type { BaseOptions } from './global';
 
 // eslint-disable-next-line @typescript-eslint/no-extraneous-class
 export class AgentsEndpoint {
@@ -12,7 +11,7 @@ export class AgentsEndpoint {
 				`/agents/${options.uuid}?language=${options?.language ?? 'en-US'}&isPlayableCharacter=${options?.isPlayableCharacter ?? false}`
 			);
 		}
-		const options = _options as AgentUuidOptions;
+		const options = _options as AgentOptions;
 		return handleFetch<Agent[]>(`/agents?language=${options?.language ?? 'en-US'}&isPlayableCharacter=${options?.isPlayableCharacter ?? false}`);
 	}
 }
@@ -68,7 +67,8 @@ export interface AgentVoicelineMedia {
 	wave: string;
 }
 
-export interface AgentOptions extends BaseOptions {
+export interface AgentOptions {
+	language?: string;
 	isPlayableCharacter?: boolean;
 }
 
