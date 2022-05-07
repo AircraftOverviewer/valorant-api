@@ -6,7 +6,7 @@ export class ContentTiersEndpoint {
 	public async get(options: UuidOptions): Promise<ContentTier>;
 	public async get(options?: BaseOptions): Promise<ContentTier[]>;
 	public async get(options?: unknown): Promise<ContentTier | ContentTier[]> {
-		if ((options as UuidOptions).uuid) {
+		if ((options as UuidOptions)?.uuid) {
 			const _options = options as UuidOptions;
 			return handleFetch<ContentTier>(`/contenttiers/${_options.uuid}?language=${_options?.language ?? 'en-US'}`);
 		}

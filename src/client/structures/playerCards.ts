@@ -6,7 +6,7 @@ export class PlayerCardsEndpoint {
 	public async get(options: UuidOptions): Promise<PlayerCard>;
 	public async get(options?: BaseOptions): Promise<PlayerCard[]>;
 	public async get(options?: unknown): Promise<PlayerCard | PlayerCard[]> {
-		if ((options as UuidOptions).uuid) {
+		if ((options as UuidOptions)?.uuid) {
 			const _options = options as UuidOptions;
 			return handleFetch<PlayerCard>(`/playercards/${_options.uuid}?language=${_options?.language ?? 'en-US'}`);
 		}

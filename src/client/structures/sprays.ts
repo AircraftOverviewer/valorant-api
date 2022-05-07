@@ -6,7 +6,7 @@ export class SpraysEndpoint {
 	public async get(options: UuidOptions): Promise<Spray>;
 	public async get(options?: BaseOptions): Promise<Spray[]>;
 	public async get(options?: unknown): Promise<Spray | Spray[]> {
-		if ((options as UuidOptions).uuid) {
+		if ((options as UuidOptions)?.uuid) {
 			const _options = options as UuidOptions;
 			return handleFetch<Spray>(`/sprays/${_options.uuid}?language=${_options?.language ?? 'en-US'}`);
 		}
@@ -17,7 +17,7 @@ export class SpraysEndpoint {
 	public async getLevels(options: UuidOptions): Promise<SprayLevel>;
 	public async getLevels(options?: BaseOptions): Promise<SprayLevel[]>;
 	public async getLevels(options?: unknown): Promise<SprayLevel | SprayLevel[]> {
-		if ((options as UuidOptions).uuid) {
+		if ((options as UuidOptions)?.uuid) {
 			const _options = options as UuidOptions;
 			return handleFetch<SprayLevel>(`/sprays/levels/${_options.uuid}?language=${_options?.language ?? 'en-US'}`);
 		}

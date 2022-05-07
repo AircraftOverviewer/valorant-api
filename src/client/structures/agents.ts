@@ -2,17 +2,19 @@ import { handleFetch } from '../../utils/Fetch';
 
 // eslint-disable-next-line @typescript-eslint/no-extraneous-class
 export class AgentsEndpoint {
-	public async get(_options: AgentUuidOptions): Promise<Agent>;
-	public async get(_options?: AgentOptions): Promise<Agent[]>;
-	public async get(_options?: unknown): Promise<Agent | Agent[]> {
-		if ((_options as AgentUuidOptions).uuid) {
-			const options = _options as AgentUuidOptions;
+	public async get(options: AgentUuidOptions): Promise<Agent>;
+	public async get(options?: AgentOptions): Promise<Agent[]>;
+	public async get(options?: unknown): Promise<Agent | Agent[]> {
+		if ((options as AgentUuidOptions)?.uuid) {
+			const _options = options as AgentUuidOptions;
 			return handleFetch<Agent>(
-				`/agents/${options.uuid}?language=${options?.language ?? 'en-US'}&isPlayableCharacter=${options?.isPlayableCharacter ?? false}`
+				`/agents/${_options.uuid}?language=${_options?.language ?? 'en-US'}&isPlayableCharacter=${_options?.isPlayableCharacter ?? false}`
 			);
 		}
-		const options = _options as AgentOptions;
-		return handleFetch<Agent[]>(`/agents?language=${options?.language ?? 'en-US'}&isPlayableCharacter=${options?.isPlayableCharacter ?? false}`);
+		const _options = options as AgentOptions;
+		return handleFetch<Agent[]>(
+			`/agents?language=${_options?.language ?? 'en-US'}&isPlayableCharacter=${_options?.isPlayableCharacter ?? false}`
+		);
 	}
 }
 

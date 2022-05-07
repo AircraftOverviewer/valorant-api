@@ -6,7 +6,7 @@ export class ThemesEndpoint {
 	public async get(options: UuidOptions): Promise<Theme>;
 	public async get(options?: BaseOptions): Promise<Theme[]>;
 	public async get(options?: unknown): Promise<Theme | Theme[]> {
-		if ((options as UuidOptions).uuid) {
+		if ((options as UuidOptions)?.uuid) {
 			const _options = options as UuidOptions;
 			return handleFetch<Theme>(`/themes/${_options.uuid}?language=${_options?.language ?? 'en-US'}`);
 		}

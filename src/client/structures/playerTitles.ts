@@ -6,7 +6,7 @@ export class PlayerTitlesEndpoint {
 	public async get(options: UuidOptions): Promise<PlayerTitle>;
 	public async get(options?: BaseOptions): Promise<PlayerTitle[]>;
 	public async get(options?: unknown): Promise<PlayerTitle | PlayerTitle[]> {
-		if ((options as UuidOptions).uuid) {
+		if ((options as UuidOptions)?.uuid) {
 			const _options = options as UuidOptions;
 			return handleFetch<PlayerTitle>(`/playertitles/${_options.uuid}?language=${_options?.language ?? 'en-US'}`);
 		}

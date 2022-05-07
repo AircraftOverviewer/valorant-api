@@ -6,7 +6,7 @@ export class MapsEndpoint {
 	public async get(options: UuidOptions): Promise<Map>;
 	public async get(options?: BaseOptions): Promise<Map[]>;
 	public async get(options?: unknown): Promise<Map | Map[]> {
-		if ((options as UuidOptions).uuid) {
+		if ((options as UuidOptions)?.uuid) {
 			const _options = options as UuidOptions;
 			return handleFetch<Map>(`/maps/${_options.uuid}?language=${_options?.language ?? 'en-US'}`);
 		}

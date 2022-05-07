@@ -6,7 +6,7 @@ export class BundlesEndpoint {
 	public async get(options: UuidOptions): Promise<Bundle>;
 	public async get(options?: BaseOptions): Promise<Bundle[]>;
 	public async get(options?: unknown): Promise<Bundle | Bundle[]> {
-		if ((options as UuidOptions).uuid) {
+		if ((options as UuidOptions)?.uuid) {
 			const _options = options as UuidOptions;
 			return handleFetch<Bundle>(`/bundles/${_options.uuid}?language=${_options?.language ?? 'en-US'}`);
 		}

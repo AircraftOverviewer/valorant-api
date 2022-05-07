@@ -6,7 +6,7 @@ export class BuddiesEndpoint {
 	public async get(options: UuidOptions): Promise<Buddy>;
 	public async get(options?: BaseOptions): Promise<Buddy[]>;
 	public async get(options?: unknown): Promise<Buddy | Buddy[]> {
-		if ((options as UuidOptions).uuid) {
+		if ((options as UuidOptions)?.uuid) {
 			const _options = options as UuidOptions;
 			return handleFetch<Buddy>(`/buddies/${_options.uuid}?language=${_options?.language ?? 'en-US'}`);
 		}
@@ -17,7 +17,7 @@ export class BuddiesEndpoint {
 	public async getLevels(options: UuidOptions): Promise<BuddyLevel>;
 	public async getLevels(options?: BaseOptions): Promise<BuddyLevel[]>;
 	public async getLevels(options?: unknown): Promise<BuddyLevel | BuddyLevel[]> {
-		if ((options as UuidOptions).uuid) {
+		if ((options as UuidOptions)?.uuid) {
 			const _options = options as UuidOptions;
 			return handleFetch<BuddyLevel>(`/buddies/levels/${_options.uuid}?language=${_options?.language ?? 'en-US'}`);
 		}

@@ -6,7 +6,7 @@ export class WeaponsEndpoint {
 	public async get(options: UuidOptions): Promise<Weapon>;
 	public async get(options?: BaseOptions): Promise<Weapon[]>;
 	public async get(options?: unknown): Promise<Weapon | Weapon[]> {
-		if ((options as UuidOptions).uuid) {
+		if ((options as UuidOptions)?.uuid) {
 			const _options = options as UuidOptions;
 			return handleFetch<Weapon>(`/weapons/${_options.uuid}?language=${_options?.language ?? 'en-US'}`);
 		}
@@ -17,7 +17,7 @@ export class WeaponsEndpoint {
 	public async getSkins(options: UuidOptions): Promise<WeaponSkin>;
 	public async getSkins(options?: BaseOptions): Promise<WeaponSkin[]>;
 	public async getSkins(options?: unknown): Promise<WeaponSkin | WeaponSkin[]> {
-		if ((options as UuidOptions).uuid) {
+		if ((options as UuidOptions)?.uuid) {
 			const _options = options as UuidOptions;
 			return handleFetch<WeaponSkin>(`/weapons/skins/${_options.uuid}?language=${_options?.language ?? 'en-US'}`);
 		}
@@ -28,7 +28,7 @@ export class WeaponsEndpoint {
 	public async getSkinChromas(options: UuidOptions): Promise<WeaponSkinChroma>;
 	public async getSkinChromas(options?: BaseOptions): Promise<WeaponSkinChroma[]>;
 	public async getSkinChromas(options?: unknown): Promise<WeaponSkinChroma | WeaponSkinChroma[]> {
-		if ((options as UuidOptions).uuid) {
+		if ((options as UuidOptions)?.uuid) {
 			const _options = options as UuidOptions;
 			return handleFetch<WeaponSkinChroma>(`/weapons/skinchromas/${_options.uuid}?language=${_options?.language ?? 'en-US'}`);
 		}
@@ -39,7 +39,7 @@ export class WeaponsEndpoint {
 	public async getSkinLevels(options: UuidOptions): Promise<WeaponSkinLevel>;
 	public async getSkinLevels(options?: BaseOptions): Promise<WeaponSkinLevel[]>;
 	public async getSkinLevels(options?: unknown): Promise<WeaponSkinLevel | WeaponSkinLevel[]> {
-		if ((options as UuidOptions).uuid) {
+		if ((options as UuidOptions)?.uuid) {
 			const _options = options as UuidOptions;
 			return handleFetch<WeaponSkinLevel>(`/weapons/skinlevels/${_options.uuid}?language=${_options?.language ?? 'en-US'}`);
 		}
@@ -145,7 +145,7 @@ export interface WeaponSkinChroma {
 }
 
 export interface WeaponSkinLevel {
-	uuid: string;
+	uuid: string | null;
 	displayName: string;
 	levelItem: string | null;
 	displayIcon: string | null;

@@ -6,7 +6,7 @@ export class CurrenciesEndpoint {
 	public async get(options: UuidOptions): Promise<Currency>;
 	public async get(options?: BaseOptions): Promise<Currency[]>;
 	public async get(options?: unknown): Promise<Currency | Currency[]> {
-		if ((options as UuidOptions).uuid) {
+		if ((options as UuidOptions)?.uuid) {
 			const _options = options as UuidOptions;
 			return handleFetch<Currency>(`/currencies/${_options.uuid}?language=${_options?.language ?? 'en-US'}`);
 		}

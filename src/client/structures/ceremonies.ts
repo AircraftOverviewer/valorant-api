@@ -6,7 +6,7 @@ export class CeremoniesEndpoint {
 	public async get(options: UuidOptions): Promise<Ceremony>;
 	public async get(options?: BaseOptions): Promise<Ceremony[]>;
 	public async get(options?: unknown): Promise<Ceremony | Ceremony[]> {
-		if ((options as UuidOptions).uuid) {
+		if ((options as UuidOptions)?.uuid) {
 			const _options = options as UuidOptions;
 			return handleFetch<Ceremony>(`/ceremonies/${_options.uuid}?language=${_options?.language ?? 'en-US'}`);
 		}

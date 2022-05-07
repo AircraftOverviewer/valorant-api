@@ -6,7 +6,7 @@ export class GearEndpoint {
 	public async get(options: UuidOptions): Promise<Gear>;
 	public async get(options?: BaseOptions): Promise<Gear[]>;
 	public async get(options?: unknown): Promise<Gear | Gear[]> {
-		if ((options as UuidOptions).uuid) {
+		if ((options as UuidOptions)?.uuid) {
 			const _options = options as UuidOptions;
 			return handleFetch<Gear>(`/gear/${_options.uuid}?language=${_options?.language ?? 'en-US'}`);
 		}

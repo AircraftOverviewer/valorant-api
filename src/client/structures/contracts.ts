@@ -6,7 +6,7 @@ export class ContractsEndpoint {
 	public async get(options: UuidOptions): Promise<Contract>;
 	public async get(options?: BaseOptions): Promise<Contract[]>;
 	public async get(options?: unknown): Promise<Contract | Contract[]> {
-		if ((options as UuidOptions).uuid) {
+		if ((options as UuidOptions)?.uuid) {
 			const _options = options as UuidOptions;
 			return handleFetch<Contract>(`/contracts/${_options.uuid}?language=${_options?.language ?? 'en-US'}`);
 		}
